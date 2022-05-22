@@ -1,0 +1,47 @@
+.wrapper {
+  padding: 0.9rem 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: rgba(22, 24, 35, 0.03);
+  }
+}
+
+.avatar {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 1.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name {
+  line-height: 2rem;
+  color: rgba(22, 24, 35, 0.5);
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.check-icon {
+  font-size: 1.4rem;
+  color: var(--check-color);
+  margin-left: 0.6rem;
+}
