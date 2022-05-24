@@ -4,6 +4,8 @@
 :root {
   --primary-color: #fe2c55;
   --check-color: #20d5ec;
+  --white-color: #ffffff;
+  --black-color: #161823;
 
   --default-layout-height-header: 6rem;
   --default-layout-width: 115rem;
@@ -28,6 +30,7 @@ textarea,
 select,
 button {
   outline: none;
+  border: none;
 }
 input {
   line-height: normal;

@@ -1,16 +1,18 @@
-import styles from './Header.module.scss';
-import classNames from 'classnames/bind';
 import images from '@/assets/images';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tippy from '@tippyjs/react/headless';
+import AccountItem from '@/components/AccountItem';
+import Button from '@/components/Button';
+import WrapperPopper from '@/components/WrapperPopper';
 import {
   faCircleXmark,
   faMagnifyingGlass,
+  faPlus,
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import WrapperPopper from '@/components/WrapperPopper';
-import AccountItem from '@/components/AccountItem';
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -19,9 +21,9 @@ function Header() {
 
   useEffect(() => {
     setTimeout(() => {
-      setSearchResult([1, 2, 3]);
+      setSearchResult([]);
     }, 0);
-  });
+  }, []);
 
   return (
     <header className={cx('wrapper')}>
@@ -60,7 +62,16 @@ function Header() {
             </button>
           </div>
         </Tippy>
-        <div>action</div>
+        <div className={cx('action')}>
+          <Button
+            className={cx('upload-button')}
+            type="text"
+            leftIcon={<FontAwesomeIcon icon={faPlus} />}
+          >
+            Upload
+          </Button>
+          <Button type="primary">Log in</Button>
+        </div>
       </div>
     </header>
   );
