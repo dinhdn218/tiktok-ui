@@ -18,6 +18,10 @@
   cursor: pointer;
   user-select: none;
 
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+
   & + .wrapper {
     margin-left: 1.6rem;
   }
@@ -78,10 +82,6 @@
 .text {
   border: 1px solid rgba(22, 24, 35, 0.12);
   border-radius: 2px;
-
-  &:hover {
-    background-color: rgba(22, 24, 35, 0.03);
-  }
 }
 
 // Button sizes
@@ -100,4 +100,9 @@
 .icon + .title,
 .title + .icon {
   margin-left: 0.8rem;
+}
+
+.icon {
+  width: 2rem;
+  text-align: center;
 }

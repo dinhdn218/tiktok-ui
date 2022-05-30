@@ -6,12 +6,12 @@
 
 .container {
   width: var(--default-layout-width);
-  background-color: aquamarine;
+  padding-left: 2rem;
+  padding-right: 2.4rem;
 
   display: flex;
 }
 
 .content {
   flex: 1;
-  background-color: aqua;
 }

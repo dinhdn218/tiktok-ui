@@ -1,9 +1,16 @@
 import images from '@/assets/images';
 import AccountItem from '@/components/AccountItem';
 import Button from '@/components/Button';
-import WrapperPopper from '@/components/WrapperPopper';
 import {
+  Wrapper as PopperWrapper,
+  Menu as MenuPopper,
+} from '@/components/Popper';
+import {
+  faCircleQuestion,
   faCircleXmark,
+  faEllipsisVertical,
+  faKeyboard,
+  faLanguage,
   faMagnifyingGlass,
   faPlus,
   faSpinner,
@@ -15,6 +22,22 @@ import { useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
+
+const MENU_ITEMS = [
+  {
+    icon: <FontAwesomeIcon icon={faLanguage} />,
+    label: 'English',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+    label: 'Feedback and help',
+    to: '/feedback',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faKeyboard} />,
+    label: 'Keyboard shortcuts',
+  },
+];
 
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
@@ -34,13 +57,13 @@ function Header() {
           interactive
           render={(attrs) => (
             <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-              <WrapperPopper>
+              <PopperWrapper>
                 <div className={cx('search-title')}>Accounts</div>
                 <AccountItem />
                 <AccountItem />
                 <AccountItem />
                 <AccountItem />
-              </WrapperPopper>
+              </PopperWrapper>
             </div>
           )}
         >
@@ -64,13 +87,18 @@ function Header() {
         </Tippy>
         <div className={cx('action')}>
           <Button
-            className={cx('upload-button')}
+            overrideStyleClass={cx('upload-button')}
             type="text"
             leftIcon={<FontAwesomeIcon icon={faPlus} />}
           >
             Upload
           </Button>
           <Button type="primary">Log in</Button>
+          <MenuPopper items={MENU_ITEMS}>
+            <div className={cx('more-btn')}>
+              <FontAwesomeIcon icon={faEllipsisVertical} />
+            </div>
+          </MenuPopper>
         </div>
       </div>
     </header>

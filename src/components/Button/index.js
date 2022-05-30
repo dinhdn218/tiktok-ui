@@ -5,7 +5,7 @@ import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
 
 function Button({
-  className,
+  overrideStyleClass,
   to,
   href,
   children,
@@ -37,7 +37,7 @@ function Button({
   }
 
   const classes = cx('wrapper', {
-    [className]: className,
+    [overrideStyleClass]: overrideStyleClass,
     [type]: type,
     [size]: size,
     disabled,
