@@ -4,9 +4,10 @@ import styles from './Menu.module.scss';
 
 const cx = classNames.bind(styles);
 
-function MenuItem({ data }) {
+function MenuItem({ data, onClick }) {
   return (
     <Button
+      onClick={onClick}
       overrideStyleClass={cx('menu-item')}
       leftIcon={data.icon}
       to={data.to}
