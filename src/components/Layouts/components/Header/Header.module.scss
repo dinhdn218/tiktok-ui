@@ -116,6 +116,20 @@
   align-items: center;
 }
 
+.icon-btn {
+  padding: 0.2rem;
+  margin-left: 1.6rem;
+}
+
+.avatar-img {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 2.4rem;
+  cursor: pointer;
+}
+
 .upload-button {
   width: 11.4rem;
   font-weight: 500;

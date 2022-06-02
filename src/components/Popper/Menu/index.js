@@ -8,22 +8,31 @@ import MenuItem from './MenuItem';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, items }) {
+function Menu({ children, items, onChange }) {
   const [history, setHistory] = useState([{ data: items }]);
   const current = history[history.length - 1];
 
   const renderItem = () =>
     current.data.map((item, index) => {
       const isParent = !!item.children;
+
+      const classes =
+        history.length > 1
+          ? cx('menu-item-children')
+          : item.separate
+          ? cx('separate')
+          : '';
+
       return (
         <MenuItem
+          overrideStyleClass={classes}
           key={index}
           data={item}
           onClick={() => {
             if (isParent) {
               setHistory((prev) => [...prev, item.children]);
             } else {
-              console.log(item);
+              onChange(item);
             }
           }}
         />
@@ -32,9 +41,12 @@ function Menu({ children, items }) {
 
   return (
     <Tippy
+      visible
+      offset={[14, 12]}
       delay={[0, 500]}
       placement="bottom-end"
       interactive
+      onHide={() => setHistory([{ data: items }])}
       render={(attrs) => (
         <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
           <PopperWrapper overrideStyleClass={cx('menu-popper')}>

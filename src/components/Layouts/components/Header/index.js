@@ -2,18 +2,22 @@ import images from '@/assets/images';
 import AccountItem from '@/components/AccountItem';
 import Button from '@/components/Button';
 import {
-  Wrapper as PopperWrapper,
   Menu as MenuPopper,
+  Wrapper as PopperWrapper,
 } from '@/components/Popper';
 import {
+  faArrowRightFromBracket,
   faCircleQuestion,
   faCircleXmark,
+  faCoins,
   faEllipsisVertical,
+  faGear,
   faKeyboard,
   faLanguage,
   faMagnifyingGlass,
   faPlus,
   faSpinner,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
@@ -23,47 +27,76 @@ import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
-const MENU_ITEMS = [
-  {
-    icon: <FontAwesomeIcon icon={faLanguage} />,
-    label: 'English',
-    children: {
-      title: 'Language',
-      data: [
-        {
-          code: 'en',
-          label: 'English',
-        },
-        {
-          code: 'vi',
-          label: 'Tiếng Việt',
-        },
-        {
-          code: 'fr',
-          label: 'French',
-        },
-      ],
-    },
-  },
-  {
-    icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-    label: 'Feedback and help',
-    to: '/feedback',
-  },
-  {
-    icon: <FontAwesomeIcon icon={faKeyboard} />,
-    label: 'Keyboard shortcuts',
-  },
-];
-
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
+
+  const currentUser = true;
+
+  const MENU_ITEMS = [
+    {
+      icon: <FontAwesomeIcon icon={faLanguage} />,
+      label: 'English',
+      children: {
+        title: 'Language',
+        data: [
+          {
+            code: 'en',
+            label: 'English',
+          },
+          {
+            code: 'vi',
+            label: 'Tiếng Việt',
+          },
+          {
+            code: 'fr',
+            label: 'French',
+          },
+        ],
+      },
+    },
+    {
+      icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+      label: 'Feedback and help',
+      to: '/feedback',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faKeyboard} />,
+      label: 'Keyboard shortcuts',
+    },
+  ];
+
+  const USER_MENU_ITEMS = [
+    {
+      icon: <FontAwesomeIcon icon={faUser} />,
+      label: 'View profile',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faCoins} />,
+      label: 'Get coins',
+      to: '/coin',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faGear} />,
+      label: 'Settings',
+      to: '/setting',
+    },
+    ...MENU_ITEMS,
+    {
+      icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+      label: 'Log out',
+      separate: true,
+    },
+  ];
 
   useEffect(() => {
     setTimeout(() => {
       setSearchResult([]);
     }, 0);
   }, []);
+
+  const handleChangeMenu = (menuItem) => {
+    console.log(menuItem);
+  };
 
   return (
     <header className={cx('wrapper')}>
@@ -110,11 +143,33 @@ function Header() {
           >
             Upload
           </Button>
-          <Button type="primary">Log in</Button>
-          <MenuPopper items={MENU_ITEMS}>
-            <div className={cx('more-btn')}>
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </div>
+          {currentUser ? (
+            <>
+              <button className={cx('icon-btn', 'messages-btn')}>
+                <img src={images.messages} alt="Messages" />
+              </button>
+              <button className={cx('icon-btn', 'messages-btn')}>
+                <img src={images.inbox} alt="Inbox" />
+              </button>
+            </>
+          ) : (
+            <Button type="primary">Log in</Button>
+          )}
+          <MenuPopper
+            items={currentUser ? USER_MENU_ITEMS : MENU_ITEMS}
+            onChange={handleChangeMenu}
+          >
+            {currentUser ? (
+              <img
+                className={cx('avatar-img')}
+                src="https://allimages.sgp1.digitaloceanspaces.com/wikilaptopcom/2021/06/Tuyen-tap-hinh-nen-phong-canh-thien-nhien-cuc-dep.jpg"
+                alt="Bum"
+              />
+            ) : (
+              <div className={cx('more-btn')}>
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </div>
+            )}
           </MenuPopper>
         </div>
       </div>
