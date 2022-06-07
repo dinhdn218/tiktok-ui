@@ -2,27 +2,34 @@ import images from '@/assets/images';
 import AccountItem from '@/components/AccountItem';
 import Button from '@/components/Button';
 import {
+  CoinIcon,
+  InboxIcon,
+  KeyboardIcon,
+  LanguageIcon,
+  LogoutIcon,
+  MessageIcon,
+  PlusIcon,
+  QuestionIcon,
+  SearchIcon,
+  SettingIcon,
+  UserIcon,
+} from '@/components/Icons';
+import Image from '@/components/Image';
+import {
   Menu as MenuPopper,
   Wrapper as PopperWrapper,
 } from '@/components/Popper';
 import {
-  faArrowRightFromBracket,
-  faCircleQuestion,
   faCircleXmark,
-  faCoins,
   faEllipsisVertical,
-  faGear,
-  faKeyboard,
-  faLanguage,
-  faMagnifyingGlass,
-  faPlus,
   faSpinner,
-  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
+import 'tippy.js/dist/tippy.css';
 import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
@@ -34,7 +41,7 @@ function Header() {
 
   const MENU_ITEMS = [
     {
-      icon: <FontAwesomeIcon icon={faLanguage} />,
+      icon: <LanguageIcon />,
       label: 'English',
       children: {
         title: 'Language',
@@ -55,34 +62,34 @@ function Header() {
       },
     },
     {
-      icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+      icon: <QuestionIcon />,
       label: 'Feedback and help',
       to: '/feedback',
     },
     {
-      icon: <FontAwesomeIcon icon={faKeyboard} />,
+      icon: <KeyboardIcon />,
       label: 'Keyboard shortcuts',
     },
   ];
 
   const USER_MENU_ITEMS = [
     {
-      icon: <FontAwesomeIcon icon={faUser} />,
+      icon: <UserIcon />,
       label: 'View profile',
     },
     {
-      icon: <FontAwesomeIcon icon={faCoins} />,
+      icon: <CoinIcon />,
       label: 'Get coins',
       to: '/coin',
     },
     {
-      icon: <FontAwesomeIcon icon={faGear} />,
+      icon: <SettingIcon />,
       label: 'Settings',
       to: '/setting',
     },
     ...MENU_ITEMS,
     {
-      icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+      icon: <LogoutIcon />,
       label: 'Log out',
       separate: true,
     },
@@ -102,7 +109,7 @@ function Header() {
     <header className={cx('wrapper')}>
       <div className={cx('content')}>
         <img src={images.logo} alt="Tiktok" />
-        <Tippy
+        <HeadlessTippy
           visible={searchResult.length > 0 ? true : false}
           interactive
           render={(attrs) => (
@@ -131,26 +138,30 @@ function Header() {
               icon={faCircleXmark}
             />
             <button className={cx('search-btn')}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <SearchIcon />
             </button>
           </div>
-        </Tippy>
+        </HeadlessTippy>
         <div className={cx('action')}>
           <Button
             overrideStyleClass={cx('upload-button')}
             type="text"
-            leftIcon={<FontAwesomeIcon icon={faPlus} />}
+            leftIcon={<PlusIcon />}
           >
             Upload
           </Button>
           {currentUser ? (
             <>
-              <button className={cx('icon-btn', 'messages-btn')}>
-                <img src={images.messages} alt="Messages" />
-              </button>
-              <button className={cx('icon-btn', 'messages-btn')}>
-                <img src={images.inbox} alt="Inbox" />
-              </button>
+              <Tippy content="Message" placement="bottom">
+                <button className={cx('icon-btn', 'messages-btn')}>
+                  <MessageIcon />
+                </button>
+              </Tippy>
+              <Tippy content="Inbox" placement="bottom">
+                <button className={cx('icon-btn', 'messages-btn')}>
+                  <InboxIcon />
+                </button>
+              </Tippy>
             </>
           ) : (
             <Button type="primary">Log in</Button>
@@ -160,7 +171,7 @@ function Header() {
             onChange={handleChangeMenu}
           >
             {currentUser ? (
-              <img
+              <Image
                 className={cx('avatar-img')}
                 src="https://allimages.sgp1.digitaloceanspaces.com/wikilaptopcom/2021/06/Tuyen-tap-hinh-nen-phong-canh-thien-nhien-cuc-dep.jpg"
                 alt="Bum"

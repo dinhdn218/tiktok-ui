@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
 
   border-radius: 0.4rem;
@@ -65,7 +65,7 @@
 .rounded {
   box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
   border-radius: 999px;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   border: 1px solid rgba(22, 24, 35, 0.12);
 
   &:hover {
@@ -105,4 +105,5 @@
 .icon {
   width: 2rem;
   text-align: center;
+  display: flex;
 }

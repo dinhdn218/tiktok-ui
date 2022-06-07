@@ -1,7 +1,6 @@
 const images = {
   logo: require('@/assets/images/logo.svg').default,
-  messages: require('@/assets/images/messages.svg').default,
-  inbox: require('@/assets/images/inbox.svg').default,
+  defaultImage: require('@/assets/images/no-image.png'),
 };
 
 export default images;
