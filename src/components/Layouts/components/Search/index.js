@@ -1,0 +1,79 @@
+import AccountItem from '@/components/AccountItem';
+import { SearchIcon } from '@/components/Icons';
+import { Wrapper as PopperWrapper } from '@/components/Popper';
+import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HeadlessTippy from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
+import { useEffect, useRef, useState } from 'react';
+import 'tippy.js/dist/tippy.css';
+import styles from './Search.module.scss';
+
+const cx = classNames.bind(styles);
+
+function Search() {
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [showResult, setShowResult] = useState(true);
+  const inpRef = useRef(null);
+
+  useEffect(() => {
+    setSearchResult([1]);
+  }, []);
+
+  const handleClear = () => {
+    setSearchValue('');
+    inpRef.current.focus();
+    setSearchResult([]);
+  };
+
+  const handleHideResult = () => {
+    setShowResult(false);
+  };
+
+  return (
+    <HeadlessTippy
+      onClickOutside={handleHideResult}
+      visible={showResult && searchResult.length > 0}
+      interactive
+      render={(attrs) => (
+        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+          <PopperWrapper>
+            <div className={cx('search-title')}>Accounts</div>
+            <AccountItem />
+            <AccountItem />
+            <AccountItem />
+            <AccountItem />
+          </PopperWrapper>
+        </div>
+      )}
+    >
+      <div className={cx('search')}>
+        <input
+          ref={inpRef}
+          className={cx('search-input')}
+          placeholder="Search accounts and videos"
+          value={searchValue}
+          onFocus={() => setShowResult(true)}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        {/* <FontAwesomeIcon
+            className={cx('search-loading-icon')}
+            icon={faSpinner}
+          /> */}
+        {!!searchValue && (
+          <FontAwesomeIcon
+            className={cx('search-clear-icon')}
+            icon={faCircleXmark}
+            onClick={handleClear}
+          />
+        )}
+        <button className={cx('search-btn')}>
+          <SearchIcon />
+        </button>
+      </div>
+    </HeadlessTippy>
+  );
+}
+
+export default Search;
