@@ -45,6 +45,10 @@
     cursor: pointer;
   }
 
+  &-loading-icon {
+    animation: spinner 2s linear infinite;
+  }
+
   &-btn {
     border: none;
     width: var(--search-button-width);
@@ -87,5 +91,14 @@
     font-weight: 600;
     color: rgba(22, 24, 35, 0.5);
     padding: 0.5rem 1.2rem;
+  }
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

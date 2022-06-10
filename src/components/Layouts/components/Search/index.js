@@ -15,11 +15,32 @@ function Search() {
   const [searchResult, setSearchResult] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [showResult, setShowResult] = useState(true);
+  const [loading, setLoading] = useState(false);
   const inpRef = useRef(null);
 
   useEffect(() => {
-    setSearchResult([1]);
-  }, []);
+    if (!searchValue.trim()) {
+      setSearchResult([]);
+      return;
+    }
+
+    setLoading(true);
+    fetch(
+      `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
+        searchValue,
+      )}&type=less`,
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setSearchResult(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setSearchResult([]);
+        setLoading(false);
+      });
+  }, [searchValue]);
+  console.log(searchResult);
 
   const handleClear = () => {
     setSearchValue('');
@@ -40,10 +61,9 @@ function Search() {
         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
             <div className={cx('search-title')}>Accounts</div>
-            <AccountItem />
-            <AccountItem />
-            <AccountItem />
-            <AccountItem />
+            {searchResult.map((item) => (
+              <AccountItem key={item.id} data={item} />
+            ))}
           </PopperWrapper>
         </div>
       )}
@@ -55,13 +75,21 @@ function Search() {
           placeholder="Search accounts and videos"
           value={searchValue}
           onFocus={() => setShowResult(true)}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value.startsWith(' ')) {
+              return;
+            } else {
+              setSearchValue(e.target.value);
+            }
+          }}
         />
-        {/* <FontAwesomeIcon
+        {loading && (
+          <FontAwesomeIcon
             className={cx('search-loading-icon')}
             icon={faSpinner}
-          /> */}
-        {!!searchValue && (
+          />
+        )}
+        {!!searchValue.trim() && !loading && (
           <FontAwesomeIcon
             className={cx('search-clear-icon')}
             icon={faCircleXmark}

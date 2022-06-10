@@ -6,16 +6,21 @@ import Image from '../Image';
 
 const cx = classNames.bind(styles);
 
-function AccountItem() {
+function AccountItem({ data }) {
   return (
     <div className={cx('wrapper')}>
-      <Image className={cx('avatar')} src="" alt="avatar" />
+      <Image className={cx('avatar')} src={data.avatar} alt={data.full_name} />
       <div className={cx('info')}>
         <h4 className={cx('user-name')}>
-          <span>d.ngocdinh</span>
-          <FontAwesomeIcon className={cx('check-icon')} icon={faCircleCheck} />
+          <span>{data.nickname}</span>
+          {data.check && (
+            <FontAwesomeIcon
+              className={cx('check-icon')}
+              icon={faCircleCheck}
+            />
+          )}
         </h4>
-        <p className={cx('name')}>Đinh Ngọc Định</p>
+        <p className={cx('name')}>{data.full_name}</p>
       </div>
     </div>
   );
