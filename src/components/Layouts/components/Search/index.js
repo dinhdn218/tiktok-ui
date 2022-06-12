@@ -1,6 +1,7 @@
 import AccountItem from '@/components/AccountItem';
 import { SearchIcon } from '@/components/Icons';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
+import useDebounce from '@/hooks/useDebounce';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -17,17 +18,24 @@ function Search() {
   const [showResult, setShowResult] = useState(true);
   const [loading, setLoading] = useState(false);
   const inpRef = useRef(null);
+  const debounced = useDebounce(searchValue, 500);
 
   useEffect(() => {
     if (!searchValue.trim()) {
       setSearchResult([]);
       return;
     }
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (!debounced.trim()) {
+      return;
+    }
 
     setLoading(true);
     fetch(
       `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-        searchValue,
+        debounced,
       )}&type=less`,
     )
       .then((res) => res.json())
@@ -39,8 +47,8 @@ function Search() {
         setSearchResult([]);
         setLoading(false);
       });
-  }, [searchValue]);
-  console.log(searchResult);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounced]);
 
   const handleClear = () => {
     setSearchValue('');
