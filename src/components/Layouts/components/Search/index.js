@@ -2,6 +2,7 @@ import AccountItem from '@/components/AccountItem';
 import { SearchIcon } from '@/components/Icons';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import useDebounce from '@/hooks/useDebounce';
+import * as searchServices from '@/services/search';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -32,22 +33,19 @@ function Search() {
       return;
     }
 
-    setLoading(true);
-    fetch(
-      `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-        debounced,
-      )}&type=less`,
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res.data);
+    const fetchAPI = async () => {
+      setLoading(true);
+      try {
+        const result = await searchServices.search(debounced);
+        setSearchResult(result);
         setLoading(false);
-      })
-      .catch(() => {
+      } catch (error) {
         setSearchResult([]);
         setLoading(false);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      }
+    };
+
+    fetchAPI();
   }, [debounced]);
 
   const handleClear = () => {
