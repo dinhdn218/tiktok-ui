@@ -4,6 +4,9 @@
   --white-color: #ffffff;
   --black-color: #161823;
 
+  --primary-font: 'ProximaNova';
+  --secondary-font: 'SofiaPro';
+
   --default-layout-height-header: 6rem;
   --default-layout-width: 115rem;
   --sidebar-width: 35.6rem;
@@ -49,7 +52,7 @@ img {
 // Common css
 html {
   font-size: 62.5%;
-  font-family: 'ProximaNova';
+  font-family: var(--primary-font);
 }
 
 body {
@@ -59,7 +62,7 @@ body {
 
 button,
 input {
-  font-family: 'ProximaNova';
+  font-family: var(--primary-font);
   font-size: 1.6rem;
 }
 
