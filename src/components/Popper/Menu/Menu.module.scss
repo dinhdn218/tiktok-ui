@@ -17,6 +17,11 @@
       font-weight: 400;
     }
   }
+
+  .menu-scrollable {
+    max-height: min((100vh - 9.6rem) - 6rem, 73.4rem);
+    overflow-y: auto;
+  }
 }
 
 .menu-popper {

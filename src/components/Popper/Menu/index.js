@@ -59,7 +59,7 @@ function Menu({ children, items, onChange, hideOnClick = false }) {
                 }}
               />
             )}
-            {renderItem()}
+            <div className={cx('menu-scrollable')}>{renderItem()}</div>
           </PopperWrapper>
         </div>
       )}

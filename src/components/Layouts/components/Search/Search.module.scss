@@ -36,6 +36,10 @@
       fill: rgba(22, 24, 35, 0.75);
     }
   }
+  &-scrollable {
+    max-height: min((100vh - 9.6rem) - 6rem, 73.4rem);
+    overflow-y: auto;
+  }
 
   &-loading-icon,
   &-clear-icon {

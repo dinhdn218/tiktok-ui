@@ -68,6 +68,7 @@ function Search() {
 
   return (
     <HeadlessTippy
+      appendTo={() => document.body}
       onClickOutside={handleHideResult}
       visible={showResult && searchResult.length > 0}
       interactive
@@ -75,9 +76,11 @@ function Search() {
         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
             <div className={cx('search-title')}>Accounts</div>
-            {searchResult.map((item) => (
-              <AccountItem key={item.id} data={item} />
-            ))}
+            <div className={cx('search-scrollable')}>
+              {searchResult.map((item) => (
+                <AccountItem key={item.id} data={item} />
+              ))}
+            </div>
           </PopperWrapper>
         </div>
       )}

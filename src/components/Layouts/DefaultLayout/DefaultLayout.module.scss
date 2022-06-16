@@ -8,10 +8,12 @@
   width: var(--default-layout-width);
   padding-left: 2rem;
   padding-right: 2.4rem;
+  margin-top: var(--default-layout-height-header);
 
   display: flex;
 }
 
 .content {
   flex: 1;
+  height: 200rem;
 }
