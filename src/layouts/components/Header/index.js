@@ -1,6 +1,6 @@
 import images from '@/assets/images';
 import Button from '@/components/Button';
-import routes from '@/components/Config/routes';
+import config from '@/config';
 import {
   CoinIcon,
   InboxIcon,
@@ -92,7 +92,7 @@ function Header() {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('content')}>
-        <Link to={routes.home}>
+        <Link to={config.routes.home}>
           <img src={images.logo} alt="Tiktok" />
         </Link>
 
