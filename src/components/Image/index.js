@@ -2,6 +2,7 @@ import images from '@/assets/images';
 import { forwardRef, useState } from 'react';
 import styles from './Image.module.scss';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 
 const cx = classNames.bind(styles);
 
@@ -34,5 +35,12 @@ const Image = forwardRef(
     );
   },
 );
+
+Image.propTypes = {
+  className: PropTypes.string,
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  fallback: PropTypes.string,
+};
 
 export default Image;

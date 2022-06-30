@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Header from './Header';
 import styles from './Menu.module.scss';
 import MenuItem from './MenuItem';
+import PropTypes from 'prop-types';
 
 const cx = classNames.bind(styles);
 
@@ -68,5 +69,12 @@ function Menu({ children, items, onChange, hideOnClick = false }) {
     </Tippy>
   );
 }
+
+Menu.propTypes = {
+  children: PropTypes.node,
+  items: PropTypes.array,
+  onChange: PropTypes.func,
+  hideOnClick: PropTypes.bool,
+};
 
 export default Menu;
