@@ -4,6 +4,7 @@ const routes = {
   following: '/following',
   profile: '/@:nickname',
   search: '/search',
+  live: '/live',
 };
 
 export default routes;

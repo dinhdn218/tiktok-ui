@@ -30,6 +30,21 @@
     pointer-events: none;
     opacity: 0.5;
   }
+
+  & + .menu-btn {
+    margin-left: 0;
+  }
+
+  &.active {
+    color: var(--primary-color);
+
+    .active-icon {
+      display: flex;
+    }
+    .icon {
+      display: none;
+    }
+  }
 }
 
 // Button types
@@ -98,7 +113,9 @@
 }
 
 .icon + .title,
-.title + .icon {
+.title + .icon,
+.active-icon + .title,
+.title + .active-icon {
   margin-left: 0.8rem;
 }
 
@@ -106,4 +123,21 @@
   width: 2rem;
   text-align: center;
   display: flex;
+}
+
+.active-icon {
+  display: none;
+}
+
+// Menu button
+.menu-btn {
+  height: 4.8rem;
+  justify-content: flex-start;
+  font-size: 1.8rem;
+  font-weight: 700;
+  transition: background-color ease-in-out 200ms;
+
+  & > .icon {
+    width: unset;
+  }
 }

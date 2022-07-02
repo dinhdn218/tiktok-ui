@@ -6,14 +6,17 @@
 
 .container {
   width: var(--default-layout-width);
-  padding-left: 2rem;
-  padding-right: 2.4rem;
+  max-width: 100%;
   margin-top: var(--default-layout-height-header);
 
   display: flex;
+  justify-content: space-between;
 }
 
 .content {
-  flex: 1;
+  width: var(--content-width);
+  max-width: var(--content-width);
   height: 200rem;
+  margin: 0 1.6rem;
+  padding: 2.4rem 0;
 }
