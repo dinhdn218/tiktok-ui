@@ -1,8 +1,8 @@
+import userApi from '@/api/userApi';
 import AccountItem from '@/components/AccountItem';
 import { SearchIcon } from '@/components/Icons';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import useDebounce from '@/hooks/useDebounce';
-import * as searchServices from '@/services/search';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -36,7 +36,7 @@ function Search() {
     const fetchAPI = async () => {
       setLoading(true);
       try {
-        const result = await searchServices.search(debouncedValue);
+        const result = await userApi.search(debouncedValue);
         setSearchResult(result);
         setLoading(false);
       } catch (error) {
